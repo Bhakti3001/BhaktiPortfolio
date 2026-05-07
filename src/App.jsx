@@ -4,8 +4,8 @@ import { GitBranch, Link, Mail, Phone, MapPin, ExternalLink, ChevronDown, Chevro
 import './App.css';
 const Github = GitBranch;
 const Linkedin = Link;
-const enc = (path) => path.split('/').map(s => encodeURIComponent(s)).join('/');
-const SECTIONS   = ['about','experience','research','projects','conferences','awards','contact'];
+const base = import.meta.env.BASE_URL;
+const enc = (path) => (base + path.replace(/^\//, '')).split('/').map(s => encodeURIComponent(s)).join('/');const SECTIONS   = ['about','experience','research','projects','conferences','awards','contact'];
 const NAV_LABELS = ['About','Experience','Research','Projects','Conferences','Awards','Contact'];
 
 const SKILLS = {
@@ -256,7 +256,7 @@ function Hero() {
       </div>
       <div className="hero-img">
         <div className="hero-bg" />
-        <motion.img src="/Images/Headshot/headshot.jpg" alt="Bhakti Patel" className="hero-photo" style={{ y: imgY }}
+        <motion.img src={enc('/Images/Headshot/headshot.jpg')} alt="Bhakti Patel" className="hero-photo" style={{ y: imgY }}
           initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.22, ease: [0.22,1,0.36,1] }} />
         <motion.div className="h-stat dark" initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.78 }}>
           <span className="hs-n">3.92</span><span className="hs-l">GPA</span>
